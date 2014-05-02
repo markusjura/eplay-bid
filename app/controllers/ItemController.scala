@@ -121,7 +121,7 @@ object ItemController extends SecuredController {
     new ApiResponse(code = 401, message = "Authorization failed due to invalid token."),
     new ApiResponse(code = 401, message = "Authorization failed due to missing token.")))
   def itemUpdates(
-    @ApiParam(value = "Signed token", required = true, defaultValue = "e2e272b2731ae9396cc9b27fce6d2c295de4c90a-1395219575936-user-1",
+    @ApiParam(value = "Signed token", required = true, defaultValue = "7c798cbad752fd0b0c2fef8aa9f759dbeb1e4e65-1399029405970-user-1",
       allowMultiple = false)@PathParam("token") token: String) = SecuredCrossOriginResource(parse.empty, ParamToken(token)) { (username, request) =>
     Logger.debug(request.remoteAddress + " - SSE connected")
     Future.successful(
