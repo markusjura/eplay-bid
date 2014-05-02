@@ -1,0 +1,27 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+OPTIONS /*url                       controllers.AuthController.options(url)
+
+GET     /items                      controllers.ItemController.getItems
+
+POST    /items                      controllers.ItemController.updateItem
+
+GET     /images/:path               controllers.ItemImageController.getImage(path)
+
+# Retrieve bid updates
+GET     /itemUpdates/:token         controllers.ItemController.itemUpdates(token)
+
+# Initialize item DB
+POST    /init                       controllers.ItemController.init
+
+# API Documentation
+# Swagger - Root Resources Listing
+GET     /                           controllers.ApiDocController.view
+GET     /api                        controllers.ApiHelpController.getResources
+GET     /api/items                  controllers.ApiHelpController.getResource(path = "/items")
+GET     /api/images                 controllers.ApiHelpController.getResource(path = "/images")
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

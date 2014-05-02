@@ -1,0 +1,76 @@
+@(url: String)
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swagger UI</title>
+  <link href='@routes.Assets.at("css/highlight.default.css")' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='@routes.Assets.at("css/screen.css")' media='screen' rel='stylesheet' type='text/css'/>
+  <script type="text/javascript" src='@routes.Assets.at("lib/shred.bundle.js")'></script>
+  <script src='@routes.Assets.at("lib/jquery-1.8.0.min.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/jquery.slideto.min.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/jquery.wiggle.min.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/jquery.ba-bbq.min.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/handlebars-1.0.0.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/underscore-min.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/backbone-min.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/swagger.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("swagger-ui.js")' type='text/javascript'></script>
+  <script src='@routes.Assets.at("lib/highlight.7.3.pack.js")' type='text/javascript'></script>
+  <script type="text/javascript">
+    $(function () {
+      window.swaggerUi = new SwaggerUi({
+        supportHeaderParams: true,
+        headers: { "Authorization": "token e2e272b2731ae9396cc9b27fce6d2c295de4c90a-1395219575936-user-1" },
+        supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
+        url: "@url",
+        dom_id: "swagger-ui-container",
+        onComplete: function(swaggerApi, swaggerUi){
+          $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+        },
+        onFailure: function(data) {
+          log("Unable to Load SwaggerUI");
+        },
+        docExpansion: "list"
+      });
+
+      $('#input_apiKey').change(function() {
+        var key = $('#input_apiKey')[0].value;
+        log("key: " + key);
+        if(key && key.trim() != "") {
+          log("added key " + key);
+          window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
+        }
+      })
+      window.swaggerUi.load();
+    });
+
+    $(function () {
+      $.ajaxSetup({
+        beforeSend: function (jqXHR, settings) {
+          jqXHR.setRequestHeader("Authorization", "token e2e272b2731ae9396cc9b27fce6d2c295de4c90a-1395219575936-user-1");
+        }
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+<div id='header'>
+  <div class="swagger-ui-wrap">
+    <a id="logo" href="@url">eplay-bid</a>
+  </div>
+</div>
+
+<div id="message-bar" class="swagger-ui-wrap">
+  &nbsp;
+</div>
+
+<div id="swagger-ui-container" class="swagger-ui-wrap">
+
+</div>
+
+</body>
+
+</html>
