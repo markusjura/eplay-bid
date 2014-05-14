@@ -17,10 +17,10 @@ A valid `Authorization` header would look like:
 token e2e272b2731ae9396cc9b27fce6d2c295de4c90a-1395219575936-user-1
 ```
 
-More details can be found in the [REST API documentation](http://eplay-bid.markusjura.cloudbees.net)
+More details can be found in the [REST API documentation](http://eplay-bid.herokuapp.com)
 
 #### How to start
-The service is hosted on [http://eplay-bid.markusjura.cloudbees.net](http://eplay-bid.markusjura.cloudbees.net). You can use your local
+The service is hosted on [http://eplay-bid.herokuapp.com](http://eplay-bid.herokuapp.com). You can use your local
 `bidService` by:
 
 1. Installing mongo
