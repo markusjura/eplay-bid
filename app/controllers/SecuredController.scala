@@ -45,7 +45,7 @@ trait SecuredController extends Controller {
       }
   }
 
-  def CrossOriginResource[A](bp: BodyParser[A] = parse.empty)(f: Request[A] => Future[SimpleResult]): Action[A] = {
+  def CrossOriginResource[A](bp: BodyParser[A] = parse.empty)(f: Request[A] => Future[Result]): Action[A] = {
     Action.async(bp) { request =>
       f(request).map(_.withHeaders(corsHeaders: _*))
     }
@@ -72,7 +72,7 @@ trait SecuredController extends Controller {
     }
   }
 
-  def SecuredCrossOriginResource[A](bp: BodyParser[A] = parse.empty, ts: TokenSource = HeaderToken)(f: (String, Request[A]) => Future[SimpleResult]): Action[A] = {
+  def SecuredCrossOriginResource[A](bp: BodyParser[A] = parse.empty, ts: TokenSource = HeaderToken)(f: (String, Request[A]) => Future[Result]): Action[A] = {
     CrossOriginResource(bp) { request =>
       Logger.debug(s"Incoming request ${request.uri}")
       ts.unapply(request) match {

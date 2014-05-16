@@ -1,15 +1,22 @@
+import PlayKeys._
+
 name := "eplay-bid"
 
-version := "1.0"
+version := "0.2.0"
+
+scalaVersion := "2.10.4"
+
+resolvers += Resolver.url("Markus Jura fork swagger-play2", url("http://markusjura.github.com/swagger-play2"))(Resolver.ivyStylePatterns)
 
 libraryDependencies ++= Seq(
+  ws,
   "org.scalatest" %% "scalatest" % "2.1.0" % "test",
   "com.github.nscala-time" %% "nscala-time" % "0.8.0",
   "commons-io" % "commons-io" % "2.4",
   "se.radley" %% "play-plugins-salat" % "1.4.0",
-  "com.wordnik" %% "swagger-play2" % "1.3.5"
-)    
+  "swagger-play2" %% "swagger-play2" % "1.3.5"
+)
 
-play.Project.playScalaSettings
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalariformSettings
